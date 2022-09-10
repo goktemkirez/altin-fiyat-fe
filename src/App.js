@@ -1,23 +1,52 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { useEffect, useState } from 'react';
+import authAxios from "./components/axios";
 
 function App() {
+  const [goldData, setGoldData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    try {
+      // setLoading(true);
+
+      const result = await authAxios.get(`/goldPrice`);
+
+      console.log(result.data.result);
+      setGoldData(result.data.result);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setTimeout(() => {
+        // setLoading(false);
+      }, 1000);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Adi
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {goldData.map((data, index) => (
+            <tr key={index}>
+              <td>
+                {data?.name}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
