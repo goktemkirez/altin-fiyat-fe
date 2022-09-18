@@ -29,11 +29,18 @@ function App() {
 
   return (
     <div className="App">
+      <iframe src="https://api.genelpara.com/iframe/?symbol=altin&altin=GA,C,Y,T,CMR&stil=stil-8&renk=beyaz" title="Altın Fiyatları" frameborder="0" width="1000" height="405"></iframe>
       <table>
         <thead>
           <tr>
             <th>
               Adi
+            </th>
+            <th>
+              {'Alış'}
+            </th>
+            <th>
+              {'Satış'}
             </th>
           </tr>
         </thead>
@@ -42,6 +49,12 @@ function App() {
             <tr key={index}>
               <td>
                 {data?.name}
+              </td>
+              <td>
+                {data?.buying}
+              </td>
+              <td>
+                {data?.selling}
               </td>
             </tr>
           ))}
